@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment.prod';
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
-  providers: [ChatService, MessagesService]
+ // providers: [ChatService, MessagesService]
 })
 export class ChatComponent implements OnInit {
   @ViewChild('sidenav') sidenav: any;
