@@ -29,7 +29,8 @@ export class MessagesComponent implements OnInit {
   notifOthers: any[];
   otherNotif: Object[];
   private websocket = environment.socketBaseUrl;
-  constructor(private messagesService: MessagesService, public socket: Socket, public router: Router) {
+  public socket
+  constructor(private messagesService: MessagesService, public router: Router) {
     this.socket = io(this.websocket, { transports: ['websocket'] });
     this.socket.on('notification', (res) => {
       this.getNotification();

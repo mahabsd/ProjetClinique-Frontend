@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
 import { MenuService } from '../menu/menu.service';
 import { MessagesService } from 'src/app/theme/components/messages/messages.service';
 import jwt_decode from "../../../../../node_modules/jwt-decode";
@@ -24,7 +23,8 @@ export class FavoritesComponent implements OnInit {
   decoded = JSON.parse(JSON.stringify(jwt_decode(this.token)))
   userId = this.decoded._id;
   private websocket = environment.socketBaseUrl;
-  constructor(public menuService:MenuService, private messagesService: MessagesService, public socket: Socket) {
+  socket;
+  constructor(public menuService:MenuService, private messagesService: MessagesService) {
     this.socket = io(this.websocket, { transports: ['websocket'] });
     this.socket.on('notification', (res) => {
       this.getNotification();
