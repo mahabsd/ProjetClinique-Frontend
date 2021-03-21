@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { Socket } from 'ngx-socket-io';
 import { MessagesService } from './messages.service';
 import jwt_decode from "../../../../../node_modules/jwt-decode";
 import { Router } from '@angular/router';
