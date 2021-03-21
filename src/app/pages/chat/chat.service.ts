@@ -12,11 +12,11 @@ import { environment } from 'src/environments/environment.prod';
 @Injectable()
 export class ChatService {
   private url = environment.basUrl;
-  private websocket = environment.socketBaseUrl;
+ // private websocket = environment.socketBaseUrl;
   socket: any;
 
   constructor(private httpClient: HttpClient) {
-    this.socket = io(this.websocket, {transports: ['websocket']});
+   // this.socket = io(this.websocket, {transports: ['websocket']});
   }
 
   getPrivateMessage(idCandidat1, idCandidat2) {

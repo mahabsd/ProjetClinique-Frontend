@@ -4,6 +4,8 @@ import { Socket } from 'ngx-socket-io';
 import { MessagesService } from './messages.service';
 import jwt_decode from "../../../../../node_modules/jwt-decode";
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.prod';
+import { io } from 'socket.io-client';
 
 @Component({
   selector: 'app-messages',
@@ -26,7 +28,9 @@ export class MessagesComponent implements OnInit {
   notifMesg: any[];
   notifOthers: any[];
   otherNotif: Object[];
+  private websocket = environment.socketBaseUrl;
   constructor(private messagesService: MessagesService, public socket: Socket, public router: Router) {
+    this.socket = io(this.websocket, { transports: ['websocket'] });
     this.socket.on('notification', (res) => {
       this.getNotification();
     });
