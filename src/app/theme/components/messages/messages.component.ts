@@ -12,7 +12,7 @@ import { io } from 'socket.io-client';
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss'],
   encapsulation: ViewEncapsulation.None,
- // providers: [MessagesService]
+ providers: [MessagesService]
 })
 export class MessagesComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
