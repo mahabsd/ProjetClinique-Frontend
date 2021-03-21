@@ -30,7 +30,7 @@ export class MessagesComponent implements OnInit {
   private websocket = environment.socketBaseUrl;
   public socket
   constructor(private messagesService: MessagesService, public router: Router) {
-    this.socket = io(this.websocket, { transports: ['websocket'] });
+    this.socket = io(this.websocket, {transports: ['websocket']});
     this.socket.on('notification', (res) => {
       this.getNotification();
     });
