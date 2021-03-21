@@ -7,7 +7,6 @@ import { ChatService } from './chat.service';
 import { throttleTime, distinctUntilChanged } from 'rxjs/operators';
 import jwt_decode from "../../../../node_modules/jwt-decode";
 import { FormControl, FormGroup } from '@angular/forms';
-// import { Socket } from 'ngx-socket-io';
 import { LoginService } from 'src/app/services/login.service';
 import { MessagesService } from 'src/app/theme/components/messages/messages.service';
 import { io } from 'socket.io-client';

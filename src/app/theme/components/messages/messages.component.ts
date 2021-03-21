@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { Socket } from 'ngx-socket-io';
 import { MessagesService } from './messages.service';
 import jwt_decode from "../../../../../node_modules/jwt-decode";
 import { Router } from '@angular/router';
@@ -29,7 +28,8 @@ export class MessagesComponent implements OnInit {
   notifOthers: any[];
   otherNotif: Object[];
   private websocket = environment.socketBaseUrl;
-  constructor(private messagesService: MessagesService, public socket: Socket, public router: Router) {
+  public socket
+  constructor(private messagesService: MessagesService, public router: Router) {
     this.socket = io(this.websocket, { transports: ['websocket'] });
     this.socket.on('notification', (res) => {
       this.getNotification();

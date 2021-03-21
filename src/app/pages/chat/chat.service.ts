@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core'
 import { Chat } from './chat.model';
-import { Socket } from 'ngx-socket-io';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
 import * as io from 'socket.io-client';
@@ -12,11 +11,9 @@ import { environment } from 'src/environments/environment.prod';
 @Injectable()
 export class ChatService {
   private url = environment.basUrl;
- // private websocket = environment.socketBaseUrl;
-  socket: any;
+
 
   constructor(private httpClient: HttpClient) {
-   // this.socket = io(this.websocket, {transports: ['websocket']});
   }
 
   getPrivateMessage(idCandidat1, idCandidat2) {

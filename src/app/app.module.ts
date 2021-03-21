@@ -41,12 +41,8 @@ import { FavoritesComponent } from './theme/components/favorites/favorites.compo
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from 'src/app/services/token.interceptor';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import {MatBadgeModule} from '@angular/material/badge';
-import { environment } from 'src/environments/environment.prod';
 
- const socketBaseUrl = environment.socketBaseUrl
- const config: SocketIoConfig = { url: socketBaseUrl, options: {} };
 
 @NgModule({
   imports: [
@@ -66,7 +62,6 @@ import { environment } from 'src/environments/environment.prod';
     PipesModule,
     AppRoutingModule,
     HttpClientModule,
-    SocketIoModule.forRoot(config),
     MatBadgeModule
   ],
   declarations: [
