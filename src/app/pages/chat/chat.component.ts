@@ -7,9 +7,11 @@ import { ChatService } from './chat.service';
 import { throttleTime, distinctUntilChanged } from 'rxjs/operators';
 import jwt_decode from "../../../../node_modules/jwt-decode";
 import { FormControl, FormGroup } from '@angular/forms';
-import { Socket } from 'ngx-socket-io';
+// import { Socket } from 'ngx-socket-io';
 import { LoginService } from 'src/app/services/login.service';
 import { MessagesService } from 'src/app/theme/components/messages/messages.service';
+import { io } from 'socket.io-client';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-chat',
@@ -39,9 +41,10 @@ export class ChatComponent implements OnInit {
   file;
   formData;
   myFiles: any;
-  searchText : any;
+  searchText: any;
+  private websocket = environment.socketBaseUrl;
+  private socket;
   constructor(public appSettings: AppSettings,
-    private socket: Socket,
     public chatService: ChatService,
     public auth: LoginService,
     private messagesService: MessagesService) {
@@ -51,7 +54,7 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-      if (window.innerWidth <= 768) {
+    if (window.innerWidth <= 768) {
       this.sidenavOpen = false;
     }
     this.messageForm = new FormGroup({
@@ -59,7 +62,7 @@ export class ChatComponent implements OnInit {
       candidat: new FormControl(this.decoded._id),
       logo: new FormControl(this.decoded.user.profile.image)
     });
-
+    this.socket = io(this.websocket, { transports: ['websocket'] });
     this.socket.on('newUserAdded', () => {
       this.auth.getAllUsers().subscribe((res: any[]) => {
         this.chats = this.listeCandidats = res.filter(obj => obj._id !== this.userId);
@@ -69,7 +72,7 @@ export class ChatComponent implements OnInit {
       this.chats = this.listeCandidats = res.filter(obj => obj._id !== this.userId);
       this.clickUser(this.listeCandidats[0]._id);
     });
-    this.socket.on('newMessageSended', () => {     
+    this.socket.on('newMessageSended', () => {
       this.clickUser(this.chosenUser);
     });
   }
@@ -112,7 +115,7 @@ export class ChatComponent implements OnInit {
       text: "sent you a message",
       userOwner: this.userId,
       messages: true,
-      chatUrl : 'chat'
+      chatUrl: 'chat'
     }
     this.messagesService.sendNotification(message).subscribe();
     // let chatContainer = document.querySelector('.chat-content');
