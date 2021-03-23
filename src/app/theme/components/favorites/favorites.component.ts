@@ -25,7 +25,7 @@ export class FavoritesComponent implements OnInit {
   private websocket = environment.socketBaseUrl;
   socket;
   constructor(public menuService:MenuService, private messagesService: MessagesService) {
-    this.socket = io(this.websocket);
+    this.socket = io(this.websocket, {transports: ['websocket']});
     this.socket.on('notification', (res) => {
       this.getNotification();
       });
